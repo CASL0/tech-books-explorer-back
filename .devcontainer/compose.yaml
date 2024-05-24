@@ -1,0 +1,40 @@
+x-db-url: &DATABASE_URL jdbc:mysql://db:3306/tech_books_explorer?createDatabaseIfNotExist=true
+x-db-user: &DATABASE_USER user
+x-db-password: &DATABASE_PASSWORD password
+x-db-name: &DATABASE_NAME tech_books_explorer
+
+services:
+  web:
+    container_name: web_server
+    image: mcr.microsoft.com/devcontainers/java:1-21-bullseye
+    tty: true
+    working_dir: /opt/app
+    environment:
+      TZ: Asia/Tokyo
+      LANG: C.UTF-8
+      DATABASE_URL: *DATABASE_URL
+      DATABASE_USER: *DATABASE_USER
+      DATABASE_PASSWORD: *DATABASE_PASSWORD
+    volumes:
+      - ..:/opt/app:delegated
+    ports:
+      - 8091:80
+    depends_on:
+      - db
+
+  db:
+    container_name: db_server
+    image: mysql:8.3
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_USER: *DATABASE_USER
+      MYSQL_PASSWORD: *DATABASE_PASSWORD
+      MYSQL_DATABASE: *DATABASE_NAME
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+
+volumes:
+  db-data:
