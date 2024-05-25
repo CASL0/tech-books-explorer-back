@@ -1,0 +1,17 @@
+dsn: mysql://user:password@db:3306/tech_books_explorer
+name: tech_books_explorer
+docPath: docs/db
+
+lint:
+  requireColumnComment:
+    enabled: true
+    exclude:
+      - id
+      - created_at
+      - updated_at
+    excludeTables:
+      # flywayのマイグレ履歴は除外
+      - flyway_schema_history
+  columnCount:
+    enabled: true
+    max: 10
