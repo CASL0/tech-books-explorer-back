@@ -31,7 +31,8 @@
         "oderwat.indent-rainbow",
         "esbenp.prettier-vscode",
         "redhat.vscode-yaml",
-        "ReneSaarsoo.sql-formatter-vsc"
+        "ReneSaarsoo.sql-formatter-vsc",
+        "shd101wyy.markdown-preview-enhanced"
       ],
       "settings": {
         "editor.formatOnSave": true,
