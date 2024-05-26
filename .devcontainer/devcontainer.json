@@ -40,7 +40,8 @@
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[java]": {
-          "editor.defaultFormatter": "redhat.java"
+          "editor.defaultFormatter": "redhat.java",
+          "java.configuration.updateBuildConfiguration": "interactive"
         },
         "[yaml]": {
           "editor.defaultFormatter": "redhat.vscode-yaml"
