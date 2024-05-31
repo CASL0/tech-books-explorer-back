@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.stereotype.Service;
 import org.springframework.web.ErrorResponseException;
 
@@ -39,11 +40,18 @@ public class BookService {
      */
     public Integer createBook(BookRequest bookRequest) throws ErrorResponseException {
         try {
-            var book = toModel(bookRequest);
+            final var book = toModel(bookRequest);
             return books.save(book).getId();
-        } catch (NoSuchElementException | DateTimeParseException e) {
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
-            throw new ErrorResponseException(HttpStatus.BAD_REQUEST);
+            final var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+            problemDetail.setDetail("出版社が見つかりませんでした");
+            throw new ErrorResponseException(HttpStatus.BAD_REQUEST, problemDetail, null);
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+            final var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+            problemDetail.setDetail("出版日時の形式が誤っています");
+            throw new ErrorResponseException(HttpStatus.BAD_REQUEST, problemDetail, null);
         }
     }
 
@@ -56,8 +64,8 @@ public class BookService {
      * @throws DateTimeParseException 不正なDateTimeの場合にスローする
      */
     private Book toModel(BookRequest bookRequest) throws NoSuchElementException, DateTimeParseException {
-        var publisher = publishers.findFirstByName(bookRequest.getPublisher()).orElseThrow();
-        var book = new Book();
+        final var publisher = publishers.findFirstByName(bookRequest.getPublisher()).orElseThrow();
+        final var book = new Book();
         book.setTitle(bookRequest.getTitle());
         book.setIsbn(bookRequest.getIsbn());
         book.setPrice(bookRequest.getPrice());
