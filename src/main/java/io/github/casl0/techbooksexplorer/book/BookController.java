@@ -1,13 +1,12 @@
 package io.github.casl0.techbooksexplorer.book;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -48,7 +47,14 @@ public class BookController {
 
         var id = bookService.createBook(request);
 
-        return ResponseEntity.created(URI.create(String.format("/api/v1/books/%d", id))).build();
+        return ResponseEntity
+            .created(
+                ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .path("/{id}")
+                    .buildAndExpand(id)
+                    .toUri())
+            .build();
     }
 
 }
