@@ -7,7 +7,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -39,13 +38,13 @@ public class BookController {
     public ResponseEntity<Void> create(
         @RequestBody
         @Validated
-        BookRequest request,
-        BindingResult result) throws BindException, ErrorResponseException {
+        final BookRequest request,
+        final BindingResult result) throws BindException, ErrorResponseException {
         if (result.hasErrors()) {
             throw new BindException(result);
         }
 
-        var id = bookService.createBook(request);
+        final var id = bookService.createBook(request);
 
         return ResponseEntity
             .created(

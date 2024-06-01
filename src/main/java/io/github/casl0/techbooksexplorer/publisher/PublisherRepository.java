@@ -16,5 +16,5 @@ public interface PublisherRepository extends JpaRepository<Publisher, Integer> {
      * @param name 出版社名
      * @return 見つかったPublisherオブジェクト、見つからなかった場合はnull
      */
-    Optional<Publisher> findFirstByName(String name);
+    Optional<Publisher> findFirstByName(final String name);
 }

@@ -41,7 +41,7 @@ public class BookService {
      *             出版社が見つからなかった or 不正なDateTime文字列の場合に400エラーを返す
      *             登録済みのISBNの場合に409エラーを返す
      */
-    public Integer createBook(BookRequest bookRequest) throws ErrorResponseException {
+    public Integer createBook(final BookRequest bookRequest) throws ErrorResponseException {
         try {
             final var book = toModel(bookRequest);
             return books.save(book).getId();
@@ -71,7 +71,7 @@ public class BookService {
      * @throws NoSuchElementException 出版社が見つからない場合にスローする
      * @throws DateTimeParseException 不正なDateTimeの場合にスローする
      */
-    private Book toModel(BookRequest bookRequest) throws NoSuchElementException, DateTimeParseException {
+    private Book toModel(final BookRequest bookRequest) throws NoSuchElementException, DateTimeParseException {
         final var publisher = publishers.findFirstByName(bookRequest.getPublisher()).orElseThrow();
         final var book = new Book();
         book.setTitle(bookRequest.getTitle());
