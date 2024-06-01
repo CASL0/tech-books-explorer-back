@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,9 @@ public class BookService {
      * 
      * @param bookRequest 登録する技術書情報
      * @return 登録した技術書ID
-     * @throws ErrorResponseException 出版社が見つからなかった or 不正なDateTime文字列の場合に400エラーを返す
+     * @throws ErrorResponseException
+     *             出版社が見つからなかった or 不正なDateTime文字列の場合に400エラーを返す
+     *             登録済みのISBNの場合に409エラーを返す
      */
     public Integer createBook(BookRequest bookRequest) throws ErrorResponseException {
         try {
@@ -52,6 +55,11 @@ public class BookService {
             final var problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
             problemDetail.setDetail("出版日時の形式が誤っています");
             throw new ErrorResponseException(HttpStatus.BAD_REQUEST, problemDetail, null);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            final var problemDetail = ProblemDetail.forStatus(HttpStatus.CONFLICT);
+            problemDetail.setDetail("既に登録済みのISBNです");
+            throw new ErrorResponseException(HttpStatus.CONFLICT, problemDetail, null);
         }
     }
 
