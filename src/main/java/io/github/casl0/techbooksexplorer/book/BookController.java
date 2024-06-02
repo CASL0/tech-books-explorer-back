@@ -3,15 +3,19 @@ package io.github.casl0.techbooksexplorer.book;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.github.casl0.techbooksexplorer.dto.BookDto;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.ErrorResponseException;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -56,4 +60,34 @@ public class BookController {
             .build();
     }
 
+    /**
+     * 技術書データを取得する
+     * 
+     * @param id 取得する技術書のID
+     * @return 見つかった技術書
+     * @throws ErrorResponseException 見つからなかった場合は404を返す
+     */
+    @GetMapping("/books/{id}")
+    public @ResponseBody BookDto findById(
+        @PathVariable(name = "id", required = true)
+        final Integer id) throws ErrorResponseException {
+        return toBookDto(bookService.findById(id));
+    }
+
+    /**
+     * モデルからDTOに変換する
+     * 
+     * @param book Bookモデル
+     * @return Book DTO
+     */
+    private BookDto toBookDto(final Book book) {
+        return new BookDto(
+            book.getId(),
+            book.getTitle(),
+            book.getIsbn(),
+            book.getPrice(),
+            book.getUrl(),
+            book.getPublisher().getName(),
+            book.getPublishedAt().toString());
+    }
 }

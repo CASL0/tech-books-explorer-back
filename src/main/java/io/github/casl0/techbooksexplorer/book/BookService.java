@@ -64,6 +64,18 @@ public class BookService {
     }
 
     /**
+     * IDから技術書を取得します
+     * 
+     * @param id 技術書のID
+     * @return 見つかった技術書
+     * @throws ErrorResponseException 見つからなかった場合は404を返す
+     */
+    public Book findById(final Integer id) throws ErrorResponseException {
+        return books.findById(id).orElseThrow(
+            () -> new ErrorResponseException(HttpStatus.NOT_FOUND));
+    }
+
+    /**
      * リクエストボディをエンティティに変換する
      * 
      * @param bookRequest リクエストボディ
