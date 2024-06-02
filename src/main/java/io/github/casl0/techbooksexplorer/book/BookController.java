@@ -4,12 +4,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.github.casl0.techbooksexplorer.dto.BookDto;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.hibernate.validator.constraints.ISBN;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -76,13 +80,40 @@ public class BookController {
         return toBookDto(bookService.findById(id));
     }
 
-    @GetMapping("/books")
+    /**
+     * ISBNから技術書を取得する
+     * 
+     * @param isbn ISBN
+     * @return 見つかった技術書
+     * @throws ErrorResponseException 見つからなかった場合は404を返す
+     */
+    @GetMapping("/books/isbn/{isbn}")
     public @ResponseBody BookDto findByIsbn(
-        @RequestParam(name = "isbn", required = true)
+        @PathVariable(name = "isbn", required = true)
         @ISBN
         @Validated
         final String isbn) throws ErrorResponseException {
         return toBookDto(bookService.findByIsbn(isbn));
+    }
+
+    /**
+     * ページ内の技術書を取得する
+     * 
+     * @param perPage 1ページのサイズ
+     * @param page ページ番号
+     * @return 技術書のページ
+     */
+    @GetMapping("/books")
+    public @ResponseBody Page<BookDto> findPaginated(
+        @RequestParam(name = "page", required = false, defaultValue = "0")
+        final Integer page,
+
+        @RequestParam(name = "per_page", required = false, defaultValue = "20")
+        @Max(100)
+        @Min(1)
+        @Validated
+        final Integer perPage) {
+        return bookService.findPaginated(page, perPage).map(book -> toBookDto(book));
     }
 
     /**
