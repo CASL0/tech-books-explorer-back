@@ -5,6 +5,8 @@ import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.stereotype.Service;
@@ -85,6 +87,18 @@ public class BookService {
     public Book findByIsbn(final String isbn) throws ErrorResponseException {
         return books.findByIsbn(isbn).orElseThrow(
             () -> new ErrorResponseException(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * ページ内の技術書を取得します
+     * 
+     * @param page ページ番号
+     * @param pageSize 1ページのサイズ
+     * @return 技術書のページ
+     */
+    public Page<Book> findPaginated(final Integer page, final Integer pageSize) {
+        return books.findAllByOrderByPublishedAtDesc(
+            PageRequest.of(page, pageSize));
     }
 
     /**
