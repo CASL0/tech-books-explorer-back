@@ -76,6 +76,18 @@ public class BookService {
     }
 
     /**
+     * ISBNから技術書を取得します
+     * 
+     * @param isbn 技術書のISBN
+     * @return 見つかった技術書
+     * @throws ErrorResponseException 見つからなかった場合は404を返す
+     */
+    public Book findByIsbn(final String isbn) throws ErrorResponseException {
+        return books.findByIsbn(isbn).orElseThrow(
+            () -> new ErrorResponseException(HttpStatus.NOT_FOUND));
+    }
+
+    /**
      * リクエストボディをエンティティに変換する
      * 
      * @param bookRequest リクエストボディ

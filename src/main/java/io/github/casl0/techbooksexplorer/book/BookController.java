@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.hibernate.validator.constraints.ISBN;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 技術書関連のエンドポイントを扱うコントローラー
@@ -72,6 +74,15 @@ public class BookController {
         @PathVariable(name = "id", required = true)
         final Integer id) throws ErrorResponseException {
         return toBookDto(bookService.findById(id));
+    }
+
+    @GetMapping("/books")
+    public @ResponseBody BookDto findByIsbn(
+        @RequestParam(name = "isbn", required = true)
+        @ISBN
+        @Validated
+        final String isbn) throws ErrorResponseException {
+        return toBookDto(bookService.findByIsbn(isbn));
     }
 
     /**
