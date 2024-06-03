@@ -30,4 +30,16 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
      */
     @Transactional(readOnly = true)
     public Page<Book> findAllByOrderByPublishedAtDesc(final Pageable pageable);
+
+    /**
+     * ページ内の技術書をタイトルで検索する
+     * 
+     * @param keyword 検索するキーワード
+     * @param pageable ページ
+     * @return 技術書ページ
+     */
+    @Transactional(readOnly = true)
+    public Page<Book> findByTitleContainingOrderByPublishedAtDesc(
+        final String keyword,
+        final Pageable pageable);
 }

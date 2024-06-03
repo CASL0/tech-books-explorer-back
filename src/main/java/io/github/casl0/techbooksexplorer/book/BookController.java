@@ -6,11 +6,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import io.github.casl0.techbooksexplorer.dto.BookDto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Optional;
 
 import org.hibernate.validator.constraints.ISBN;
 import org.springframework.data.domain.Page;
@@ -101,6 +104,7 @@ public class BookController {
      * 
      * @param perPage 1ページのサイズ
      * @param page ページ番号
+     * @param keyword 検索キーワード
      * @return 技術書のページ
      */
     @GetMapping("/books")
@@ -112,8 +116,13 @@ public class BookController {
         @Max(100)
         @Min(1)
         @Validated
-        final Integer perPage) {
-        return bookService.findPaginated(page, perPage).map(book -> toBookDto(book));
+        final Integer perPage,
+
+        @RequestParam(name = "q", required = false)
+        @Size(max = 255)
+        @Validated
+        final String keyword) {
+        return bookService.findPaginated(page, perPage, Optional.ofNullable(keyword)).map(book -> toBookDto(book));
     }
 
     /**

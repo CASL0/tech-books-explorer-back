@@ -3,6 +3,7 @@ package io.github.casl0.techbooksexplorer.book;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -94,11 +95,19 @@ public class BookService {
      * 
      * @param page ページ番号
      * @param pageSize 1ページのサイズ
+     * @param keyword 検索キーワード
      * @return 技術書のページ
      */
-    public Page<Book> findPaginated(final Integer page, final Integer pageSize) {
-        return books.findAllByOrderByPublishedAtDesc(
-            PageRequest.of(page, pageSize));
+    public Page<Book> findPaginated(
+        final Integer page,
+        final Integer pageSize,
+        final Optional<String> keyword) {
+        final var result = keyword.map(
+            item -> books.findByTitleContainingOrderByPublishedAtDesc(
+                item,
+                PageRequest.of(page, pageSize)));
+        return result.orElse(books.findAllByOrderByPublishedAtDesc(
+            PageRequest.of(page, pageSize)));
     }
 
     /**
