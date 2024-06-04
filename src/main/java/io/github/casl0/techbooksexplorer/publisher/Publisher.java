@@ -10,23 +10,28 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 出版社のデータベースエンティティ
- * 
- * @param name 出版社名
- * @param description 出版社の説明
- * @param url 技術書ページのURL
  */
 @Entity
 @Table(name = "publishers")
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Publisher extends BaseEntity {
+    /**
+     * 出版社名
+     */
     @Column(columnDefinition = "TEXT", nullable = false)
     @NotNull
     private String name;
 
+    /**
+     * 出版社の説明
+     */
     @Column(columnDefinition = "TEXT", nullable = true)
     private String description;
 
+    /**
+     * 技術書ページのURL
+     */
     @Column(columnDefinition = "TEXT", nullable = false)
     @NotNull
     private String url;

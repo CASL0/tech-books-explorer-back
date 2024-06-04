@@ -19,24 +19,29 @@ import lombok.Data;
 /**
  * IDプロパティ付きのベースクラス
  * IDを持っているエンティティは本クラスを継承する
- * 
- * @param id ID
- * @param createdAt レコード作成日時
- * @param updatedAt レコード更新日時
  */
 @MappedSuperclass
 @Data
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity implements Serializable {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * レコード作成日時
+     */
     @Column(name = "created_at", nullable = false)
     @CreatedDate
     @NotNull
     private Instant createdAt;
 
+    /**
+     * レコード更新日時
+     */
     @Column(name = "updated_at", nullable = false)
     @LastModifiedDate
     @NotNull

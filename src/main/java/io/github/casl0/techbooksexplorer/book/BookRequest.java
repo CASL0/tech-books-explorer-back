@@ -9,36 +9,47 @@ import lombok.Data;
 
 /**
  * 技術書新規作成用のリクエストボディ
- *
- * @param title タイトル
- * @param isbn ISBN
- * @param price 価格
- * @param url URL
- * @param publisher 出版社
- * @param publishedAt 出版日
  */
 @Data
 public class BookRequest {
+    /**
+     * タイトル
+     */
     @NotNull
     @NotBlank
     @Size(max = 255)
     private String title;
 
+    /**
+     * ISBN
+     */
     @NotNull
     @ISBN(type = ISBN.Type.ISBN_13)
     private String isbn;
 
+    /**
+     * 価格
+     */
     private String price;
 
+    /**
+     * URL
+     */
     @NotNull
     @NotBlank
     @URL
     private String url;
 
+    /**
+     * 出版社
+     */
     @NotNull
     @NotBlank
     private String publisher;
 
+    /**
+     * 出版日
+     */
     @NotNull
     @NotBlank
     private String publishedAt;
