@@ -119,10 +119,9 @@ public class BookController {
         final Integer perPage,
 
         @RequestParam(name = "q", required = false)
-        @Size(max = 255)
         @Validated
-        final String keyword) {
-        return bookService.findPaginated(page, perPage, Optional.ofNullable(keyword)).map(book -> toBookDto(book));
+        final Optional<@Size(max = 255) String> keyword) {
+        return bookService.findPaginated(page, perPage, keyword).map(book -> toBookDto(book));
     }
 
     /**
