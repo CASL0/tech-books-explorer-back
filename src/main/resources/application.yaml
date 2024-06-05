@@ -12,3 +12,15 @@ spring:
       enabled: true
 server:
   port: 80
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include:
+          - prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  server:
+    port: 9090
