@@ -97,17 +97,22 @@ public class BookService {
      * @param pageSize 1ページのサイズ
      * @param keyword 検索キーワード
      * @return 技術書のページ
+     * @throws ErrorResponseException 技術書が見つからなかった場合
      */
     public Page<Book> findPaginated(
         final Integer page,
         final Integer pageSize,
-        final Optional<String> keyword) {
+        final Optional<String> keyword) throws ErrorResponseException {
         final var result = keyword.map(
             item -> books.findByTitleContainingOrderByPublishedAtDesc(
                 item,
+                PageRequest.of(page, pageSize)))
+            .orElse(books.findAllByOrderByPublishedAtDesc(
                 PageRequest.of(page, pageSize)));
-        return result.orElse(books.findAllByOrderByPublishedAtDesc(
-            PageRequest.of(page, pageSize)));
+        if (result.isEmpty()) {
+            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
+        }
+        return result;
     }
 
     /**
