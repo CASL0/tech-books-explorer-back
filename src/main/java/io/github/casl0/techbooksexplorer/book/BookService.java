@@ -125,13 +125,12 @@ public class BookService {
      */
     private Book toModel(final BookRequest bookRequest) throws NoSuchElementException, DateTimeParseException {
         final var publisher = publishers.findFirstByName(bookRequest.getPublisher()).orElseThrow();
-        final var book = new Book();
-        book.setTitle(bookRequest.getTitle());
-        book.setIsbn(bookRequest.getIsbn());
-        book.setPrice(bookRequest.getPrice());
-        book.setUrl(bookRequest.getUrl());
-        book.setPublisher(publisher);
-        book.setPublishedAt(Instant.parse(bookRequest.getPublishedAt()));
-        return book;
+        return new Book(
+            bookRequest.getTitle(),
+            bookRequest.getIsbn(),
+            bookRequest.getPrice(),
+            bookRequest.getUrl(),
+            publisher,
+            Instant.parse(bookRequest.getPublishedAt()));
     }
 }
