@@ -32,7 +32,8 @@
         "esbenp.prettier-vscode",
         "redhat.vscode-yaml",
         "ReneSaarsoo.sql-formatter-vsc",
-        "shd101wyy.markdown-preview-enhanced"
+        "shd101wyy.markdown-preview-enhanced",
+        "42crunch.vscode-openapi"
       ],
       "settings": {
         "editor.formatOnSave": true,
