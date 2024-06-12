@@ -19,8 +19,13 @@ management:
       exposure:
         include:
           - prometheus
+          - health
   endpoint:
     prometheus:
       enabled: true
+    health:
+      enabled: true
+      probes:
+        enabled: true
   server:
     port: 8089
