@@ -33,7 +33,8 @@
         "redhat.vscode-yaml",
         "ReneSaarsoo.sql-formatter-vsc",
         "shd101wyy.markdown-preview-enhanced",
-        "42crunch.vscode-openapi"
+        "42crunch.vscode-openapi",
+        "NicolasVuillamy.vscode-groovy-lint"
       ],
       "settings": {
         "editor.formatOnSave": true,
@@ -50,6 +51,9 @@
         },
         "[sql]": {
           "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
+        },
+        "[groovy]": {
+          "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
         }
       }
     }
