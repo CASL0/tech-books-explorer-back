@@ -37,3 +37,15 @@ tasks.named('test') {
 dependencyLocking {
     lockAllConfigurations()
 }
+
+tasks.named('bootBuildImage') {
+    builder = 'paketobuildpacks/builder-jammy-base:0.4.302'
+    imageName = "ghcr.io/casl0/${project.name}:${project.version}"
+    createdDate = 'now'
+    docker {
+        publishRegistry {
+          username = System.getenv('DOCKER_PUBLISH_USERNAME')
+          password = System.getenv('DOCKER_PUBLISH_PASSWORD')
+        }
+    }
+}
