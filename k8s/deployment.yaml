@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-books-explorer
+  namespace: tech-books-explorer-dev
+  labels:
+    name: tech-books-explorer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tech-books-explorer
+      app.kubernetes.io/instance: tech-books-explorer-back
+      app.kubernetes.io/component: api-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tech-books-explorer
+        app.kubernetes.io/instance: tech-books-explorer-back
+        app.kubernetes.io/component: api-server
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: "RuntimeDefault"
+      containers:
+        - image: ghcr.io/casl0/techbooksexplorer:0.0.1-snapshot
+          name: api-server
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "50M"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8089
+            initialDelaySeconds: 10
+            timeoutSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8089
+            initialDelaySeconds: 5
+            timeoutSeconds: 10
+          env:
+          # TODO:Secretにする
+            - name: DATABASE_URL
+              value: jdbc:mysql://192.168.0.4:3306/tech_books_explorer?createDatabaseIfNotExist=true
+            - name: DATABASE_USER
+              value: user
+            - name: DATABASE_PASSWORD
+              value: password
+          ports:
+            - containerPort: 80
+              name: server
+            - containerPort: 8089
+              name: actuator
+          imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

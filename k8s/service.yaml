@@ -1,0 +1,22 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: tech-books-explorer
+  namespace: tech-books-explorer-dev
+  labels:
+    app.kubernetes.io/name: tech-books-explorer
+    app.kubernetes.io/instance: tech-books-explorer-back
+    app.kubernetes.io/component: api-server
+spec:
+  selector: 
+    app.kubernetes.io/name: tech-books-explorer
+    app.kubernetes.io/instance: tech-books-explorer-back
+    app.kubernetes.io/component: api-server
+  type: ClusterIP 
+  ports:
+  - name: server
+    port: 80
+    targetPort: server
+  - name: actuator
+    port: 8888
+    targetPort: actuator
