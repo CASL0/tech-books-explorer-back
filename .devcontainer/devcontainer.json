@@ -34,7 +34,9 @@
         "ReneSaarsoo.sql-formatter-vsc",
         "shd101wyy.markdown-preview-enhanced",
         "42crunch.vscode-openapi",
-        "NicolasVuillamy.vscode-groovy-lint"
+        "NicolasVuillamy.vscode-groovy-lint",
+        "ipedrazas.kubernetes-snippets",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
       ],
       "settings": {
         "editor.formatOnSave": true,
