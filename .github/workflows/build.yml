@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  - push
+
+jobs:
+  build:
+    name: bootJar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up spring
+        uses: spring-io/spring-gradle-build-action@v2
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Build
+        run: |
+          chmod +x gradlew
+          ./gradlew bootJar
