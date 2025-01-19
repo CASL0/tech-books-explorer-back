@@ -36,7 +36,8 @@
         "42crunch.vscode-openapi",
         "NicolasVuillamy.vscode-groovy-lint",
         "ipedrazas.kubernetes-snippets",
-        "ms-kubernetes-tools.vscode-kubernetes-tools"
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "vivaxy.vscode-conventional-commits"
       ],
       "settings": {
         "editor.formatOnSave": true,
