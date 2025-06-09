@@ -6,7 +6,7 @@ x-db-name: &DATABASE_NAME tech_books_explorer
 services:
   web:
     container_name: web_server
-    image: mcr.microsoft.com/devcontainers/java:1-21-bullseye
+    image: mcr.microsoft.com/devcontainers/base:ubuntu-22.04
     tty: true
     working_dir: /opt/app
     environment:
