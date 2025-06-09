@@ -3,6 +3,8 @@ x-db-user: &DATABASE_USER user
 x-db-password: &DATABASE_PASSWORD password
 x-db-name: &DATABASE_NAME tech_books_explorer
 
+name: tech_books_explorer
+
 services:
   web:
     container_name: web_server
