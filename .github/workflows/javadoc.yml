@@ -1,4 +1,4 @@
-name: Deploy Java Doc
+name: Deploy Doxygen Doc
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  artifact_path: build/docs/javadoc
+  artifact_path: html
 
 jobs:
   build:
@@ -20,16 +20,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: "21"
-          distribution: "temurin"
-
-      - name: Build Java Doc
+      - name: Set up doxygen
         run: |
-          chmod +x gradlew
-          ./gradlew javadoc
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+
+      - name: Build Doxygen Doc
+        run: doxygen
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
