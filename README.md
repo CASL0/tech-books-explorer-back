@@ -23,18 +23,4 @@ curl -X 'GET' \
 
 ## Developing
 
-Java21 をインストールしてください。
-
-以下のコマンドで開発サーバーを起動します。
-
-```sh
-./gradlew bootRun
-```
-
-### dependency の追加
-
-dependency locking しています。新しく依存関係を追加する際は、以下のコマンドを実行してください。
-
-```sh
-./gradlew dependencies --write-locks
-```
+[DEVELOPING.md](docs/DEVELOPING.md)をご覧ください。
