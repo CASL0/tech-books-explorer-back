@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.5.0'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'net.ltgt.errorprone' version '4.2.0'
+    id 'com.diffplug.spotless' version '7.0.4'
 }
 
 group = 'io.github.casl0'
@@ -49,5 +50,24 @@ tasks.named('bootBuildImage') {
           username = System.getenv('DOCKER_PUBLISH_USERNAME')
           password = System.getenv('DOCKER_PUBLISH_PASSWORD')
         }
+    }
+}
+
+spotless {
+    java {
+        importOrder()
+        removeUnusedImports()
+        googleJavaFormat().skipJavadocFormatting()
+        formatAnnotations()
+        leadingTabsToSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    groovyGradle {
+        target '*.gradle'
+        greclipse()
+        leadingTabsToSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 }
