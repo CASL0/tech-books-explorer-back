@@ -37,17 +37,23 @@
         "NicolasVuillamy.vscode-groovy-lint",
         "ipedrazas.kubernetes-snippets",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "vivaxy.vscode-conventional-commits"
+        "vivaxy.vscode-conventional-commits",
+        "richardwillis.vscode-spotless-gradle"
       ],
       "settings": {
         "editor.formatOnSave": true,
+        "java.format.enabled": false,
+        "spotlessGradle.diagnostics.enable": true,
+        "spotlessGradle.format.enable": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.spotlessGradle": "explicit"
+        },
         "[json]": {
           "editor.defaultFormatter": "esbenp.prettier-vscode"
         },
         "[java]": {
-          "editor.defaultFormatter": "redhat.java",
-          "java.configuration.updateBuildConfiguration": "interactive",
-          "java.format.settings.url": "eclipse-formatter.xml"
+          "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
+          "java.configuration.updateBuildConfiguration": "interactive"
         },
         "[yaml]": {
           "editor.defaultFormatter": "redhat.vscode-yaml"
@@ -55,8 +61,8 @@
         "[sql]": {
           "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
         },
-        "[groovy]": {
-          "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
+        "[gradle]": {
+          "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
         }
       }
     }
