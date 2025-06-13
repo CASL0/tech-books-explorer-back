@@ -79,4 +79,8 @@ spotless {
         targetExclude 'docs/**/*.json'
         prettier().config(['parser': 'json'])
     }
+    yaml {
+        target '**/*.yaml', '**/*.yml'
+        prettier()
+    }
 }
