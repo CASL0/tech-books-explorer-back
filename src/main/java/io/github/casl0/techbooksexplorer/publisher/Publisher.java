@@ -16,23 +16,21 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Publisher extends BaseEntity {
-    /**
-     * 出版社名
-     */
-    @Column(columnDefinition = "TEXT", nullable = false)
-    @NotNull
-    private String name;
+  /**
+   * 出版社名
+   */
+  @Column(columnDefinition = "TEXT", nullable = false)
+  @NotNull private String name;
 
-    /**
-     * 出版社の説明
-     */
-    @Column(columnDefinition = "TEXT", nullable = true)
-    private String description;
+  /**
+   * 出版社の説明
+   */
+  @Column(columnDefinition = "TEXT", nullable = true)
+  private String description;
 
-    /**
-     * 技術書ページのURL
-     */
-    @Column(columnDefinition = "TEXT", nullable = false)
-    @NotNull
-    private String url;
+  /**
+   * 技術書ページのURL
+   */
+  @Column(columnDefinition = "TEXT", nullable = false)
+  @NotNull private String url;
 }

@@ -1,7 +1,7 @@
-openapi: '3.0.2'
+openapi: "3.0.2"
 info:
   title: Tech Books Explorer
-  version: '1.0'
+  version: "1.0"
 servers:
   - url: https://localhost:8091/api/v1
     description: ローカルホスト
@@ -69,11 +69,11 @@ components:
       type: array
       maxItems: 100
       items:
-        $ref: '#/components/schemas/Book'
+        $ref: "#/components/schemas/Book"
 paths:
   /books:
     post:
-      description: '技術書を新規に作成する'
+      description: "技術書を新規に作成する"
       operationId: createBooks
       tags:
         - books
@@ -81,18 +81,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BookRequest'
+              $ref: "#/components/schemas/BookRequest"
       responses:
-        '201':
+        "201":
           description: 作成成功
-        '400':
+        "400":
           description: バリデーションエラー
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/Error"
     get:
-      description: '技術書のリストを取得する'
+      description: "技術書のリストを取得する"
       operationId: listBooks
       tags:
         - books
@@ -121,13 +121,13 @@ paths:
             type: string
             maxLength: 255
       responses:
-        '200':
+        "200":
           description: 技術書のページ
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Books'
-        '404':
+                $ref: "#/components/schemas/Books"
+        "404":
           description: キーワードに該当する技術書が見つからなかった
           content:
             application/problem+json:
@@ -135,7 +135,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /books/{bookId}:
     get:
-      description: '指定の技術書を取得する'
+      description: "指定の技術書を取得する"
       operationId: showBookById
       tags:
         - books
@@ -147,13 +147,13 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Book'
-        '404':
+                $ref: "#/components/schemas/Book"
+        "404":
           description: IDに該当する技術書が見つからなかった
           content:
             application/problem+json:
@@ -161,7 +161,7 @@ paths:
                 $ref: "#/components/schemas/Error"
   /books/isbn/{isbn}:
     get:
-      description: 'ISBNから技術書を取得する'
+      description: "ISBNから技術書を取得する"
       operationId: showBookByIsbn
       tags:
         - books
@@ -173,13 +173,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Book'
-        '404':
+                $ref: "#/components/schemas/Book"
+        "404":
           description: ISBNに該当する技術書が見つからなかった
           content:
             application/problem+json:

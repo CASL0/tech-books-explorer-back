@@ -12,14 +12,15 @@
       "installMaven": "false",
       "installGradle": "true"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {}
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "java -version",
+  "postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -29,35 +30,24 @@
         "vmware.vscode-boot-dev-pack",
         "EditorConfig.EditorConfig",
         "oderwat.indent-rainbow",
-        "esbenp.prettier-vscode",
-        "redhat.vscode-yaml",
-        "ReneSaarsoo.sql-formatter-vsc",
         "shd101wyy.markdown-preview-enhanced",
         "42crunch.vscode-openapi",
         "NicolasVuillamy.vscode-groovy-lint",
         "ipedrazas.kubernetes-snippets",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "vivaxy.vscode-conventional-commits"
+        "vivaxy.vscode-conventional-commits",
+        "richardwillis.vscode-spotless-gradle"
       ],
       "settings": {
         "editor.formatOnSave": true,
-        "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "java.format.enabled": false,
+        "java.configuration.updateBuildConfiguration": "interactive",
+        "spotlessGradle.diagnostics.enable": true,
+        "spotlessGradle.format.enable": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.spotlessGradle": "explicit"
         },
-        "[java]": {
-          "editor.defaultFormatter": "redhat.java",
-          "java.configuration.updateBuildConfiguration": "interactive",
-          "java.format.settings.url": "eclipse-formatter.xml"
-        },
-        "[yaml]": {
-          "editor.defaultFormatter": "redhat.vscode-yaml"
-        },
-        "[sql]": {
-          "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
-        },
-        "[groovy]": {
-          "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint"
-        }
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
       }
     }
   },

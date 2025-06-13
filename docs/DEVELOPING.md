@@ -28,9 +28,14 @@ DevContainer の使用を推奨する。
 
 ## Formatter
 
-[VSCode の拡張](https://marketplace.visualstudio.com/items?itemName=redhat.java)から Formatter を実行する。[Eclipse formatter like の設定ファイル](https://github.com/redhat-developer/vscode-java/wiki/Formatter-settings)で Formatter の設定をする。
+[Spotless plugin for Gradle](https://github.com/diffplug/spotless/tree/main/plugin-gradle)経由で各言語向けの formatter を実行している。
 
-[google-java-format](https://github.com/google/google-java-format)に変えるかも。
+- Java: [google-java-format](https://github.com/google/google-java-format)
+- Gradle: [groovy-eclipse](https://github.com/groovy/groovy-eclipse)
+- SQL: [dbeaver](https://dbeaver.io/)
+- JSON: [prettier](https://prettier.io/)
+- YAML: [prettier](https://prettier.io/)
+- Markdown: [prettier](https://prettier.io/)
 
 ## 依存ライブラリ
 

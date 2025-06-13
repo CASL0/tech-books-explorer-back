@@ -43,7 +43,7 @@ spec:
             initialDelaySeconds: 5
             timeoutSeconds: 10
           env:
-          # TODO:Secretにする
+            # TODO:Secretにする
             - name: DATABASE_URL
               value: jdbc:mysql://192.168.0.4:3306/tech_books_explorer?createDatabaseIfNotExist=true
             - name: DATABASE_USER
