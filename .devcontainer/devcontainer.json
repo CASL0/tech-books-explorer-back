@@ -12,14 +12,15 @@
       "installMaven": "false",
       "installGradle": "true"
     },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {}
   },
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "java -version",
+  "postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install --lts",
 
   // Configure tool-specific properties.
   "customizations": {
@@ -29,7 +30,6 @@
         "vmware.vscode-boot-dev-pack",
         "EditorConfig.EditorConfig",
         "oderwat.indent-rainbow",
-        "esbenp.prettier-vscode",
         "redhat.vscode-yaml",
         "shd101wyy.markdown-preview-enhanced",
         "42crunch.vscode-openapi",
@@ -48,7 +48,7 @@
           "source.fixAll.spotlessGradle": "explicit"
         },
         "[json]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
+          "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
         },
         "[java]": {
           "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle",
