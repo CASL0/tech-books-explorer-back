@@ -46,7 +46,8 @@
         "spotlessGradle.format.enable": true,
         "editor.codeActionsOnSave": {
           "source.fixAll.spotlessGradle": "explicit"
-        }
+        },
+        "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
       }
     }
   },
