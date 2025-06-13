@@ -83,4 +83,9 @@ spotless {
         target '**/*.yaml', '**/*.yml'
         prettier()
     }
+    format 'styling', {
+        target '**/*.md'
+        targetExclude 'docs/db/**/*.md'
+        prettier()
+    }
 }
