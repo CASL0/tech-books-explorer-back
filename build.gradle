@@ -74,4 +74,9 @@ spotless {
         target '**/*.sql'
         dbeaver()
     }
+    json {
+        target '**/*.json'
+        targetExclude 'docs/**/*.json'
+        prettier().config(['parser': 'json'])
+    }
 }
