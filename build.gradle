@@ -70,4 +70,8 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
+    sql {
+        target '**/*.sql'
+        dbeaver()
+    }
 }
