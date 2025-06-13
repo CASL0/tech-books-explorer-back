@@ -31,7 +31,6 @@
         "oderwat.indent-rainbow",
         "esbenp.prettier-vscode",
         "redhat.vscode-yaml",
-        "ReneSaarsoo.sql-formatter-vsc",
         "shd101wyy.markdown-preview-enhanced",
         "42crunch.vscode-openapi",
         "NicolasVuillamy.vscode-groovy-lint",
@@ -59,7 +58,7 @@
           "editor.defaultFormatter": "redhat.vscode-yaml"
         },
         "[sql]": {
-          "editor.defaultFormatter": "ReneSaarsoo.sql-formatter-vsc"
+          "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
         },
         "[gradle]": {
           "editor.defaultFormatter": "richardwillis.vscode-spotless-gradle"
