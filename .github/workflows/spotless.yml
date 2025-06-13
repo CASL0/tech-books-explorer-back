@@ -1,0 +1,26 @@
+---
+name: Spotless Check
+
+on:
+  - push
+
+jobs:
+  build:
+    name: spotlessCheck
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Check
+        run: |
+          chmod +x gradlew
+          ./gradlew spotlessCheck
